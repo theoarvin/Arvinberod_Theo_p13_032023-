@@ -33,7 +33,6 @@ function SignIn() {
       .then((res) => {
         refSignupEmailError.current.innerHTML = "";
         refSignupPasswordError.current.innerHTML = "";
-        console.log(res);
         dispatch(loginSuccess(res.data.body));
         navigate("/user");
       })

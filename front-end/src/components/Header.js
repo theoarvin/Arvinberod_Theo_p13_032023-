@@ -6,6 +6,9 @@ import argentBankLogo from "../assets/img/argentBankLogo.png";
 function Header({ userProfile }) {
   const user = useSelector((state) => state?.user?.userData);
 
+  const handleLogout = () => {
+    window.location = "/";
+  };
   return (
     <>
       {userProfile ? (
@@ -23,7 +26,7 @@ function Header({ userProfile }) {
               <i className="fa fa-user-circle"></i>
               {user?.firstName}
             </Link>
-            <Link className="main-nav-item" to="/">
+            <Link className="main-nav-item" onClick={() => handleLogout()}>
               <i className="fa fa-sign-out"></i>
               Sign Out
             </Link>

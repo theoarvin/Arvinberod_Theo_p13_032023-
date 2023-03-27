@@ -289,4 +289,63 @@ html {
       width: 200px;
     }
   }
-  
+.title-edit{
+  padding-top: 35px;
+}
+.edit-block{
+  width: 30%;
+  height: 100px;
+  margin: auto;
+  margin-top: 40px;
+  @media(max-width: 1015px){
+    height: auto;
+    width: 60%;
+   }
+  .edit-block_input{
+   width: 60%;
+   margin: auto;
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 10px;
+   @media(max-width: 1015px){
+    flex-direction:column;
+    align-items: center;
+    height: auto;
+    width: 100%;
+   }
+   input{
+    height: 30px;
+    width: 48%;
+    border:solid 1px gray; 
+    border-radius: 2px;
+    padding-left: 8px;
+    @media(max-width: 1015px){
+      margin-top: 10px;
+     }
+   }
+  }
+  .edit-block_button{
+   width: 40%;
+   margin: auto;
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 10px;
+   @media(max-width: 1015px){
+    flex-direction:column;
+    align-items: center;
+    height: auto;
+    width: 60%;
+   }
+    button{
+     width: 47%;
+     height: 30px;
+     border: solid 1px gray;
+     border-radius: 2px;
+     background-color: #fff;
+     @media(max-width: 1015px){
+      margin-top: 10px;
+     }
+    }
+   }
+}
+

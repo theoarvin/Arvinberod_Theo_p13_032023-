@@ -49,7 +49,6 @@ function Profile() {
       },
     })
       .then((res) => {
-        console.log(res.data.body);
         dispacth(editUserData(res.data.body));
         setIsEdit(false);
       })
@@ -65,23 +64,27 @@ function Profile() {
             <div className="header">
               {isEdit ? (
                 <>
-                  <h1>Welcome back</h1>
+                  <h1 className="title-edit">Welcome back</h1>
                   <div className="edit-block">
                     <form onSubmit={(e) => handleSubmit(e)}>
-                      <input
-                        type="text"
-                        placeholder={user?.firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        required={true}
-                      />
-                      <input
-                        type="text"
-                        placeholder={user?.lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                        required={true}
-                      />
-                      <button type="submit">Save</button>
-                      <button onClick={() => setIsEdit(false)}>Cancel</button>
+                      <div className="edit-block_input">
+                        <input
+                          type="text"
+                          placeholder={user?.firstName}
+                          onChange={(e) => setFirstName(e.target.value)}
+                          required={true}
+                        />
+                        <input
+                          type="text"
+                          placeholder={user?.lastName}
+                          onChange={(e) => setLastName(e.target.value)}
+                          required={true}
+                        />
+                      </div>
+                      <div className="edit-block_button">
+                        <button type="submit">Save</button>
+                        <button onClick={() => setIsEdit(false)}>Cancel</button>
+                      </div>
                     </form>
                   </div>
                 </>
