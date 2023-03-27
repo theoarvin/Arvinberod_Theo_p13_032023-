@@ -2,14 +2,19 @@ import React, { useRef, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { loginSuccess } from "../feature/auth.slice";
+import { useNavigate } from "react-router-dom";
 
 function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
 
   const refSignupEmailError = useRef();
   const refSignupPasswordError = useRef();
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const userNameError = "Error: User not found!";
   const passwordError = "Error: Password is invalid";
@@ -28,8 +33,9 @@ function SignIn() {
       .then((res) => {
         refSignupEmailError.current.innerHTML = "";
         refSignupPasswordError.current.innerHTML = "";
-        setToken(res.data.body.token);
-        console.log("token = ", token);
+        console.log(res);
+        dispatch(loginSuccess(res.data.body));
+        navigate("/user");
       })
       .catch((err) => {
         if (err.response.data.message === userNameError) {
