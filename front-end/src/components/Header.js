@@ -9,6 +9,7 @@ function Header({ userProfile }) {
   const handleLogout = () => {
     window.location = "/";
   };
+
   return (
     <>
       {userProfile ? (

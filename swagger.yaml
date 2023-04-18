@@ -110,7 +110,148 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-securityDefinitions:
+  /transactions:
+    get:
+      tags:
+        - Transactions
+      summary: Récupération de toutes les transactions pour le mois en cours
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        - in: query
+          name: date
+          description: La date à laquelle les transactions doivent être récupérées (au format yyyy-mm-dd)
+          type: string
+      responses:
+        200:
+          description: Les transactions ont été récupérées avec succès
+        400:
+          description: La date fournie est invalide
+        401:
+          description: L'utilisateur doit être authentifié pour accéder à cette ressource
+        500:
+          description: Une erreur s'est produite du côté serveur
+    post:
+      tags:
+        - Transactions
+      summary: Ajout d'une nouvelle transaction
+      parameters:
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+        - in: body
+          name: transaction
+          description: La transaction à ajouter
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              date:
+                type: string
+                format: date
+              amount:
+                type: number
+              description:
+                type: string
+      responses:
+        201:
+          description: La transaction a été ajoutée avec succès
+        400:
+          description: La transaction fournie est invalide
+        401:
+          description: L'utilisateur doit être authentifié pour accéder à cette ressource
+        500:
+          description: Une erreur s'est produite du côté serveur
+  /transactions/{id}:
+    get:
+      tags:
+        - Transactions
+      summary: Récupération des détails d'une transaction spécifique
+      parameters:
+        - in: path
+          name: id
+          description: L'identifiant unique de la transaction
+          required: true
+          type: integer
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+      responses:
+        200:
+          description: Les détails de la transaction ont été récupérés avec succès
+        401:
+          description: L'utilisateur doit être authentifié pour accéder à cette ressource
+        404:
+          description: La transaction demandée n'existe pas
+        500:
+          description: Une erreur s'est produite du côté serveur
+    put:
+      tags:
+        - Transactions
+      summary: Modification d'une transaction existante
+      parameters:
+        - in: path
+          name: id
+          description: L'identifiant unique de la transaction
+          required: true
+          type: integer
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true  
+        - in: body
+          name: transaction
+          description: Les nouvelles informations à mettre à jour pour la transaction
+          schema:
+            type: object
+            properties:
+              date:
+                type: string
+                format: date
+              amount:
+                type: number
+              description:
+                type: string
+      responses:
+        200:
+          description: La transaction a été modifiée avec succès
+        400:
+          description: La transaction fournie est invalide
+        401:
+          description: L'utilisateur doit être authentifié pour accéder à cette ressource
+        404:
+          description: La transaction demandée n'existe pas
+        500:
+          description: Une erreur s'est produite du côté serveur
+    delete:
+      tags:
+        - Transactions
+      summary: Suppression d'une transaction existante
+      parameters:
+        - in: path
+          name: id
+          description: L'identifiant unique de la transaction
+          required: true
+          type: integer
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          required: true
+      responses:
+        204:
+          description: La transaction a été supprimée avec succès
+        401:
+          description: L'utilisateur doit être authentifié pour accéder à cette ressource
+        404:
+          description: La transaction demandée n'existe pas
+        500:
+          description: Une erreur s'est produite du côté serveur
+  securityDefinitions:
   Bearer:
     type: apiKey
     name: Authorization
